@@ -1,0 +1,4 @@
+Bundle-Name: guestdemo
+Bundle-SymbolicName: com.guestdemo
+Bundle-Version: 1.0.0
+Export-Package: com.guestdemo.constants

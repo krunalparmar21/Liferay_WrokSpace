@@ -1,0 +1,4 @@
+Bundle-Name: ModelListner
+Bundle-SymbolicName: com.inexture
+Bundle-Version: 1.0.0
+Export-Package: com.inexture.constants

@@ -1,0 +1,113 @@
+https://legacy.reactjs.org/docs/getting-started.html
+
+Email  two Step : yiozdfcceviynypa
+
+
+
+
+Install JAVA
+
+sudo tar zxvf jdk-7u80-linux-x64.tar.gz -C /usr/lib/jvm
+sudo update-alternatives --install /usr/bin/java java /usr/lib/jvm/jdk1.7.0_80/bin/java 5
+sudo update-alternatives --install /usr/bin/javac javac /usr/lib/jvm/jdk1.7.0_80/bin/javac 5
+sudo update-alternatives --set java /usr/lib/jvm/jdk1.8.0_351/bin/java
+									
+									
+									/usr/lib/jvm/jdk1.8.0_351/bin/java
+sudo update-alternatives --set java /usr/lib/jvm/jdk1.8.0_351/bin/java
+sudo update-alternatives --set javac /usr/lib/jvm/jdk1.8.0_351/bin/javac
+
+sudo update-alternatives --set java /usr/lib/jvm/jdk-11.0.15_linux-x64_bin/jdk-11.0.15/bin/java
+
+
+sudo update-alternatives --set java /usr/lib/jvm/jdk-11.0.15_linux-x64_bin/jdk-11.0.15/bin/java
+sudo update-alternatives --set javac /usr/lib/jvm/jdk1.7.0_80/bin/javac
+sudo update-alternatives --config java
+sudo update-alternatives --config java
+sudo update-alternatives --config javac  
+/usr/lib/jvm/jdk1.8.0_351/bin/java
+
+sudo export $JAVA_HOME
+
+
+
+sudo export $JRE_HOME update-java-alternatives --list
+
+sudo update-alternatives --set java /usr/lib/jvm/jdk-11.0.15_linux-x64_bin/jdk-11.0.15/bin/java
+
+export JAVA_HOME=/usr/lib/jvm/jdk-11.0.15_linux-x64_bin/jdk-11.0.15
+export JAVA_HOME=/usr/lib/jvm/jdk1.8.0_202
+export JRE_HOME=/usr/lib/jvm/jdk-11.0.15_linux-x64_bin/jdk-11.0.15
+
+export JRE_HOME="/usr/lib/jvm/jdk1.8.0_351"
+
+export JRE_HOME="/usr/lib/jvm/jdk-11.0.15_linux-x64_bin/jdk-11.0.15"
+sudo update-alternatives --set java /usr/lib/jvm/jdk1.8.0_202/bin/java
+
+
+export JRE_HOME=/usr/lib/jvm/jdk1.8.0_202/bin/java
+
+export JRE_HOME="/usr/lib/jvm/jdk1.7.0_80/"
+
+
+CREATE USER 'username'@'root' IDENTIFIED WITH authentication_plugin BY '123';
+
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
+
+krunal   Pass@1234
+
+CREATE USER 'krunal'@'localhost' IDENTIFIED BY 'Pass@1234';
+
+GRANT PRIVILEGE ON database.table TO 'krunal'@'localhost';
+
+
+GRANT CREATE, ALTER, DROP, INSERT, UPDATE, DELETE, SELECT, REFERENCES, RELOAD on *.* TO 'krunal'@'localhost' WITH GRANT OPTION;
+GRANT ALL ON mydb TO 'krunal'@'%';
+
+GRANT ALL PRIVILEGES ON *.* TO 'krunal'@'%';
+GRANT CREATE ON mydb TO 'krunal'@'localhost';
+
+GRANT SELECT ON *.* TO 'krunal'@'localhost';
+GRANT ALL PRIVILEGES ON *.* TO 'krunal'@'localhost';
+
+SHOW GRANTS FOR 'krunal'@'localhost'\G
+
+
+
+GRANT ALL ON mydb.* TO 'krunal'@'localhost';
+
+
+GRANT ALL PRIVILEGES ON database_name.* TO 'krunal'@'localhost';
+
+GRANT privilege ON Liferay TO krunal;
+GRANT ALL PRIVILEGES ON Liferay.* TO 'krunal'@'localhost';
+
+/media/root329/Data/projects/liferay-dxp-digital-enterprise-tomcat-7.0-ga1-20160617092557801/liferay-dxp-digital-enterprise-7.0-ga1/osgi
+
+
+
+
+
+
+sudo -i
+service mysql stop
+killall -KILL mysql mysqld_safe mysqld
+apt-get --yes purge mysql*
+apt-get --yes autoremove --purge
+apt-get autoclean
+deluser --remove-home mysql
+delgroup mysql
+rm -rf /etc/apparmor.d/abstractions/mysql /etc/apparmor.d/cache/usr.sbin.mysqld /etc/mysql /var/lib/mysql /var/log/mysql* /var/log/upstart/mysql.log* /var/run/mysqld ~/.mysql_history
+updatedb
+
+
+root
+password
+
+
+Sod(3/02/23)
+-Worked on TIBT-187 search function
+        - solving issue for webcomponent with open document for production.
+        - writing java script for webcomponent open in new window.
+		
+		

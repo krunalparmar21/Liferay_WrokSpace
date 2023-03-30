@@ -1,0 +1,4 @@
+Bundle-Name: studentCrud
+Bundle-SymbolicName: com.inexture.crudDemo
+Bundle-Version: 1.0.0
+Export-Package: com.inexture.crudDemo.constants

@@ -1,0 +1,4 @@
+Bundle-Name: LangMod
+Bundle-SymbolicName: langmod
+Bundle-Version: 1.0.0
+Export-Package: langmod.constants

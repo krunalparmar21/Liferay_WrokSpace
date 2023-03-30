@@ -1,0 +1,11 @@
+dependencies {
+	compile project(":modules:studentService:studentService-api")
+
+	compileOnly group: "com.liferay.portal", name: "release.dxp.api"
+}
+
+buildService {
+	apiDir = "../studentService-api/src/main/java"
+}
+
+group = "com.inexture.studentService"

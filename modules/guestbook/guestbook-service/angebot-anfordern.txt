@@ -1,0 +1,951 @@
+<#--  Imports  -->
+
+<#import "${fullTemplatesPath}/macros/content-wrapper.ftl" as contentWrapperMacro />
+<#import "${fullTemplatesPath}/macros/cta-secondary.ftl" as ctaSecondaryMacro />
+<#import "${fullTemplatesPath}/functions/web-content-functions.ftl" as webContentFunctions />
+<#import "${fullTemplatesPath}/functions/url-functions.ftl" as urlFunctions />
+<#import "${fullTemplatesPath}/macros/icon.ftl" as iconMacro />
+<#import "${fullTemplatesPath}/functions/web-content-functions.ftl" as webContentFunctions />
+<#import "${fullTemplatesPath}/macros/eyebrow.ftl" as eyebrowMacro />
+<#import "${fullTemplatesPath}/macros/cta-primary.ftl" as ctaPrimaryMacro />
+<#import "${fullTemplatesPath}/macros/cta-link.ftl" as ctaLinkMacro />
+<style>
+
+    .grecaptcha-badge{
+        bottom:70px !important;
+    }
+
+    #elq-FormLastRow {
+        position: absolute;
+        left: -80%;
+        top: -80%
+    }
+
+    .textContainer {
+        padding: 10px;
+    }
+
+    .elq-item-input {
+        padding: 10px;
+    }
+
+    .elq-item-select {
+        padding: 10px;
+    }
+
+    .elq-required {
+        color: red;
+    }
+
+    .checkbox-aligned {
+        font-weight: 400;
+    }
+
+    .buttonMM {
+        width: 100%;
+        border-radius: 24px;
+        background-color: #1697f3;
+        color: #ffffff;
+        border: none;
+        font-weight: 600;
+    }
+
+    .buttonMM:hover {
+        color: #1697f3;
+        background-color: #F4F6F9;
+    }
+
+    .block-full-width {
+        background-color: #fff;
+        border-bottom: 1px solid #ececec
+    }
+
+    @media(min-width:1024px) {
+        .app-root .block-full-width .sections-wrapper {
+            position: relative;
+            padding: calc(1/var(--grid-columns)*100*1% - var(--grid-gap)/var(--grid-columns)*(var(--grid-columns) - 1) + var(--grid-gap));
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+            justify-content: space-between;
+            margin: 0 auto
+        }
+
+        .app-root .block-full-width .sections-wrapper:before {
+            content: "";
+            display: block;
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 100%;
+            width: 100%;
+            pointer-events: none
+        }
+    }
+
+    .app-root .block-full-width .section-container {
+        position: relative;
+        padding: 48px 0
+    }
+
+    .app-root .block-full-width .section-container:before {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        left: calc(var(--grid-padding)*-1);
+        right: calc(var(--grid-padding)*-1);
+        height: 100%;
+        border-bottom: 1px solid #ececec;
+        pointer-events: none
+    }
+
+    @media(min-width:1024px) {
+        .app-root .block-full-width .section-container {
+            width: 100%;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            padding: 0
+        }
+
+        .app-root .block-full-width .section-container:before {
+            content: none
+        }
+    }
+
+    .app-root .block-full-width .section-content {
+        color: #333;
+        margin-bottom: 32px
+    }
+</style>
+
+<div class="row" style="background-color:#023185;">
+
+    <div class="col-sm-4">
+        <img src="/documents/45807659/45840051/people-3.png/" style="width:100%;" />
+        <div class="block-contact-section muban-block" data-component="block-contact-section">
+            <header class="contact-header">
+                <h2 class="global-h3">${LeftHandMenu.MenuTitle.getData()}</h2>
+            </header>
+            <#list LeftHandMenu.getSiblings() as curr_LeftHandMenu>
+                <#assign Hours=curr_LeftHandMenu.getChild("Hours")!"" />
+                <#list Hours.getSiblings() as curr_Hours>
+                    <#assign Times=curr_Hours.getChild("Times")!"" />
+                    <ul class="main-items">
+                        <#if Times.data?trim !="">
+                            <li>
+                                <span class="icon icon-content_-time" data-component="icon"></span>
+                                <p class="global-body main-item-copy">${Times.getData()}</p>
+                            </li>
+                        </#if>
+                    </ul>
+                </#list>
+            </#list>
+            <ul class="areas-list">
+                <#list LeftHandMenu.getSiblings() as curr_LeftHandMenu>
+                    <#assign Phone=curr_LeftHandMenu.getChild("Phone")!"" />
+                    <#list Phone.getSiblings() as curr_Phone>
+                        <#assign Department=curr_Phone.getChild("Department")!"" />
+                        <#assign PhoneNumber=curr_Phone.getChild("PhoneNumber")!"" />
+                        <#assign DepartmentEmail=curr_Phone.getChild("DepartmentEmail")!"" />
+                        <#if Department.data?trim !="">
+                            <#if PhoneNumber.data?trim !="">
+                                <#if DepartmentEmail.data?trim !="">
+                                    <li class="area-group">
+                                        <h3 class="global-body area-title">${Department.getData()}</h3>
+                                        <ul class="area-items">
+                                            <li>
+                                                <a style="color:#ffffff;" href="tel:${PhoneNumber.getData()}">
+                                                    <span class="icon icon-content_phone" data-component="icon"></span>
+                                                    <span class="area-copy global-body">${PhoneNumber.getData()}</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a style="color:#ffffff;" href="mailto:${DepartmentEmail.getData()}">
+                                                    <span class="icon icon-action-and-function_mail"
+                                                        data-component="icon"></span>
+                                                    <span
+                                                        class="area-copy global-body">${DepartmentEmail.getData()}</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </#if>
+                            </#if>
+                        </#if>
+                    </#list>
+                </#list>
+            </ul>
+        </div>
+    </div>
+
+    <div class="col-sm-8">
+
+        <section class="block-full-width muban-block" data-component="documentation-wrapper" id="quoteForm">
+            <@contentWrapperMacro.contentWrapper>
+                <div class="sections-wrapper">
+                    <section class="section-container">
+                        <div class="section-content global-body rich-body-light">
+
+                            <div style="padding-top:10px; padding-bottom:10px; padding-right:10px;">
+                                <h1 class="global-h3" style="color:#023185;">${Form.FormTitle.getData()}</h1>
+                                <h2 class="global-body-large" style="color:#023185;">${Form.FormDescription.getData()}
+                                </h2>
+                            </div>
+
+                            <!-- -->
+                            <form method="post" name="FormularohneTitel-1622630365225" id="form55" class="elq-form">
+                                <input value="FormularohneTitel-1622630365225" type="hidden" name="elqFormName">
+                                <input value="916025651" type="hidden" name="elqSiteId">
+                                <input value="" type="hidden" id="elqFormSubmissionToken" name="elqFormSubmissionToken">
+                                <input name="elqCampaignId" type="hidden">
+
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div style="padding-top:20px; padding-bottom:20px; padding-right:10px;">
+                                            <label class="global-card-body input-label" for="fe760"
+                                                id="productName">Produktkategorie:</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div style="padding-top:20px; padding-bottom:20px; padding-right:10px;">
+                                            <div class="col-sm-4 list-order three-column">
+                                                <input type="checkbox" class="checkbox-input chkbx product-checkbox"
+                                                    id="fe994" value="Beton" name="productBeton">
+                                                <label class="checkbox-aligned elq-item-label" for="fe994">Beton</label>
+                                            </div>
+
+                                            <div class="col-sm-4 list-order three-column">
+                                                <input type="checkbox" class="checkbox-input chkbx product-checkbox"
+                                                    id="fe995" value="Mineralische Rohstoffe"
+                                                    name="productMineralische-Rohstoffe">
+                                                <label class="checkbox-aligned elq-item-label" for="fe995">Mineralische
+                                                    Rohstoffe</label>
+                                            </div>
+
+                                            <div class="col-sm-4 list-order three-column">
+                                                <input type="checkbox" class="checkbox-input chkbx product-checkbox"
+                                                    id="fe996" value="Zement" name="productZement">
+                                                <label class="checkbox-aligned elq-item-label"
+                                                    for="fe996">Zement</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div style="padding-top:20px; padding-bottom:20px; padding-right:10px;">
+
+                                            <div class="col-sm-4 list-order three-column">
+                                                <input type="checkbox" class="checkbox-input chkbx product-checkbox"
+                                                    id="fe993" value="Bauchemie" name="productBauchemie">
+                                                <label class="checkbox-aligned elq-item-label"
+                                                    for="fe993">Bauchemie</label>
+                                            </div>
+                                            <div class="col-sm-4 list-order three-column">
+                                                <input type="checkbox" class="checkbox-input chkbx product-checkbox"
+                                                    id="fe997" value="Andere Produkte" name="productAndere-Produkte">
+                                                <label class="checkbox-aligned elq-item-label" for="fe997">Andere
+                                                    Produkte</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div style="padding-top:10px; padding-bottom:0px; padding-right:10px;">
+                                            <div class="col-sm-12">
+                                                <div style="padding-top:10px; padding-bottom:10px; padding-right:10px;">
+                                                    <label class="global-card-body input-label" for="fe1215"
+                                                        id="concreteVolume">Geschätzte benötigte Menge</label>
+                                                    <input type="text" class="global-body form-input"
+                                                        name="concreteVolume" required id="fe1215" value=""
+                                                        style="width:100%;"
+                                                        placeholder="Geben Sie die geschätzte benötigte Menge in Kubikmeter (m3) an">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div style="padding-top:10px; padding-bottom:0px; padding-right:10px;">
+                                            <div class="col-sm-12">
+                                                <div style="padding-top:10px; padding-bottom:10px; padding-right:10px;">
+                                                    <label class="global-cta section-title" for="fe5600"
+                                                        id="otherProd">Anfrage für ein anderes Produkt</label>
+                                                    <input type="text" class="global-body form-input"
+                                                        name="otherProduct" id="fe5600" value="" style="width:100%;"
+                                                        placeholder="Bitte nennen Sie das andere Produkt">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div style="padding-top:0px; padding-bottom:20px; padding-right:10px;">
+                                                <label style="margin-bottom:10px;" class="global-card-body input-label"
+                                                    for="fe758" id="enquiryName">Um Ihnen besser helfen zu können,
+                                                    nennen Sie uns bitte Ihre Anfragenart</label>
+                                                <div class="row" id="fe758">
+                                                    <div class="col-sm-6">
+                                                        <div
+                                                            style="padding-top:10px; padding-bottom:10px; padding-right:10px;">
+                                                            <input required type="radio"
+                                                                id="radio-Vorhandenes Projekt_59jtlz5"
+                                                                value="VORHANDENES PROJEKT" name="enqType">
+                                                            <label class="checkbox-aligned elq-item-label"
+                                                                for="radio-Vorhandenes-Projekt_z7gkbqoo">Vorhandenes
+                                                                Projekt</label>
+                                                        </div>
+                                                        <div
+                                                            style="padding-top:10px; padding-bottom:10px; padding-right:10px;">
+                                                            <input type="radio" id="radio-POTENZIELLES-PROJEKT_avjmb02"
+                                                                value="POTENZIELLES PROJEKT" name="enqType">
+                                                            <label class="checkbox-aligned elq-item-label"
+                                                                for="radio-POTENZIELLES-PROJEKT_avjmb02">Potenzielles
+                                                                Projekt</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div
+                                                            style="padding-top:10px; padding-bottom:10px; padding-right:10px;">
+                                                            <input type="radio" id="radio-ALLGEMEINE-ANFRAGE_l8i67yo5"
+                                                                value="ALLGEMEINE ANFRAGE" name="enqType">
+                                                            <label class="checkbox-aligned elq-item-label"
+                                                                for="radio-ALLGEMEINE-ANFRAGE_l8i67yo5">Allgemeine
+                                                                Anfrage</label>
+                                                        </div>
+                                                        <div
+                                                            style="padding-top:10px; padding-bottom:10px; padding-right:10px;">
+                                                            <input type="radio" id="radio-PRODUKTINFORMATION"
+                                                                value="PRODUKTINFORMATION" name="enqType">
+                                                            <label class="checkbox-aligned elq-item-label"
+                                                                for="radio-PRODUKTINFORMATION">Produktinformation</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div style="padding-top:10px; padding-bottom:10px; padding-right:10px;" name="hide">
+                                        <div class="col-sm-12">
+                                            <div style="padding-top:10px; padding-bottom:10px; padding-right:10px;">
+                                                Bitte beschreiben Sie ihr Projekt
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div style="padding-top:10px; padding-bottom:10px; padding-right:10px;"
+                                            id="generalCommentBox">
+                                            <label class="global-card-body input-label" for="fe753"
+                                                id="generalCommentLabel">Projektbeschreibung</label>
+                                            <input type="text" class="global-body form-input" name="projectDescription"
+                                                required id="fe753" value="" style="width:100%;" placeholder="">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div style="padding-top:10px; padding-bottom:10px; padding-right:10px;"
+                                            name="hide">
+                                            <label class="global-card-body input-label" for="fe748">Straße, Nr. der
+                                                Baustelle</label>
+                                            <input type="text" class="global-body form-input" name="jobsiteAddress"
+                                                required id="fe748" value="" style="width:100%;">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div style="padding-top:10px; padding-bottom:10px; padding-right:10px;" name=""
+                                            id="PLZ">
+                                            <label class="global-card-body input-label" for="fe750">PLZ</label>
+                                            <input type="text" class="global-body form-input" name="plz" required
+                                                id="fe750" value="" style="width:100%;" onkeyup="checkpostcode()">
+                                             <span id="postError" style="color:red"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div style="padding-top:10px; padding-bottom:10px; padding-right:10px;" name=""
+                                            id="Ort">
+                                            <label class="global-card-body input-label" for="fe777"
+                                                id="OrtLabel">Ort</label>
+                                            <input type="text" class="global-body form-input" name="ort" required
+                                                id="fe777" value="" style="width:100%;">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="margin-top:10px;">
+                                    <div class="col-sm-12">
+                                        <div style="padding-top:10px; padding-bottom:10px; padding-right:10px;">
+                                            <label style="margin-bottom:10px;" class="global-card-body input-label"
+                                                for="fe770" id="typeProject">Kundenbereich:</label>
+                                            <div class="row" id="fe770">
+                                                <div class="col-sm-12">
+                                                    <div
+                                                        style="padding-top:10px; padding-bottom:10px; padding-right:10px;">
+                                                        <input type="radio" id="commercial" value="KOMMERZIELL"
+                                                            name="typeCust">
+                                                        <label class="checkbox-aligned"
+                                                            for="commercial">Kommerziell</label>
+                                                        &nbsp;&nbsp;oder&nbsp;&nbsp;
+                                                        <input required type="radio" id="residential"
+                                                            value="PRIVATPERSON" name="typeCust">
+                                                        <label class="checkbox-aligned"
+                                                            for="residential">Privatperson</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div style="padding-top:10px; padding-bottom:10px; padding-right:10px;">
+                                            <h2 class="global-body-large" style="color:#023185;">Teilen Sie uns Ihre
+                                                Kontaktdaten mit</h2>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div style="padding-top:10px; padding-bottom:20px; padding-right:10px;">
+                                            <label class="global-card-body input-label" for="fe743">Vorname</label>
+                                            <input required type="text" class="global-body form-input" name="firstName"
+                                                id="fe743" value="" style="width:100%"
+                                                placeholder="Bitte geben Sie Ihren Vornamen ein">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div style="padding-top:10px; padding-bottom:20px; padding-right:10px;">
+                                            <label class="global-card-body input-label" for="fe771">Nachname</label>
+                                            <input required type="text" class="global-body form-input" name="lastName"
+                                                id="fe771" value="" style="width:100%;"
+                                                placeholder="Bitte geben Sie Ihren Nachnamen ein">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="hideProj"
+                                            style="padding-top:10px; padding-bottom:20px; padding-right:10px;">
+                                            <label class="global-card-body input-label" for="fe746">Firma</label>
+                                            <input required type="text" class="global-body form-input" name="company"
+                                                id="fe746" value="" style="width:100%;"
+                                                placeholder="Bitte geben Sie Ihren Firmennamen ein">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="hideProj"
+                                            style="padding-top:10px; padding-bottom:20px; padding-right:10px;">
+                                            <label class="global-card-body input-label" for="fe759">Position</label>
+                                            <select class="global-body form-input" id="fe759" name="JobRole"
+                                                style="width:100%;" data-value="">
+                                                <option value disabled selected>-- Bitte auswählen --</option>
+                                                <option value="Management/Geschäftsleitung">Management/Geschäftsleitung
+                                                </option>
+                                                <option value="Beratung">Beratung</option>
+                                                <option value="Abteilungsleiter">Abteilungsleiter</option>
+                                                <option value="Einkauf">Einkauf</option>
+                                                <option value="Finanzen">Finanzen</option>
+                                                <option value="Verwaltung">Verwaltung</option>
+                                                <option value="IT/Technik">IT/Technik</option>
+                                                <option value="Sonstiges">Sonstiges</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--   insert the radio buttons for phone -->
+
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div style="padding-top:10px; padding-bottom:20px; padding-right:10px;">
+                                            <label class="global-card-body input-label" for="fe745">Telefon</label>
+                                            <input required type="number" class="global-body form-input"
+                                                name="mobilePhone" id="fe745" value="" onkeyup="checkPhoneNumber()" style="width:100%;"
+                                                placeholder="Bitte geben Sie Ihre Telefonnummer ein" >
+                                                <span id="phoneError" style="color:red"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div style="padding-top:10px; padding-bottom:20px; padding-right:10px;">
+                                            <label class="global-card-body input-label" ffor="fe769">E-Mail</label>
+                                            <input required type="email" class="global-body form-input" name="email"
+                                                id="fe769" value="" style="width:100%;"
+                                                placeholder="Bitte geben Sie Ihre E-Mail-Adresse an">
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+
+                                <br />
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div style="padding-top:10px; padding-bottom:10px; padding-right:10px;">
+                                            <h4 class="elq-heading form-element-form-text">Datenschutz</h4>
+                                            <p>Mit Bestätigung des Kästchens unten willigen Sie ein, dass die von Ihnen
+                                                angegebenen Daten elektronisch erhoben und gespeichert werden. Ihre
+                                                Daten werden dabei nur streng zweckgebunden zur Bearbeitung und
+                                                Beantwortung Ihrer Anfrage genutzt. Diese Einwilligung können Sie
+                                                jederzeit unter kundenservice.de@cemex.com widerrufen. Im Falle des
+                                                Widerrufs werden Ihre Daten umgehend gelöscht. Weitere Informationen
+                                                entnehmen Sie der Datenschutzerklärung. In allen Fällen verarbeiten wir
+                                                Ihre Daten stets in Übereinstimmung mit den geltenden
+                                                Datenschutzbestimmungen.</p>
+                                            <br />
+                                            <input required class="chkbx" type="checkbox" name="ProcessData" id="fe756">
+                                            <label class="checkbox-aligned elq-item-label" for="fe756">Zustimmung zur
+                                                elektronischen Verarbeitung der Daten.</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div style="padding-top:10px; padding-bottom:40px; padding-right:10px;">
+                                            <label class="checkbox-aligned elq-item-label" for="fe866"><input
+                                                    class="chkbx" type="checkbox" name="optIn" id="fe866">
+                                                Ich möchte gerne über Produktneuheiten, Aktionen und
+                                                Produktinformationen von CEMEX via E-Mail informiert werden.</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="elq-FormLastRow" class="row">
+                                    <div class="col-sm-12">
+                                        <div style="padding-top:10px; padding-bottom:40px; padding-right:10px;">
+                                            <label class="elq-label">address1</label>
+                                            <input type="text" value="" tabindex="-1" autocomplete="off"
+                                                style="width:100%;" class="elq-item-input" name="address1" id="fe1309">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-3">
+                              
+                                        <div class="submitBtn"
+                                            style="padding-top:10px; padding-bottom:10px; padding-right:10px;">
+                                            <!--                <input type="Submit" class="buttonMM" value="Senden" id="fe736" form="form55"> -->
+                                            <input type="Submit" class="buttonMM" style="padding:15px;" value="Senden"
+                                                id="fe736" onclick="formSubmitBtn(event)" form="form55">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <input type="hidden" name="country" id="fe761" value="DE">
+                                <input type="hidden" name="CRMaccountId" id="fe401"
+                                    value="~~eloqua..type--emailfield..syntax--Customer_ID_Account1~~">
+                                <input type="hidden" name="utm_campaign" id="fe762" value="">
+                                <input type="hidden" name="utm_medium" id="fe763" value="">
+                                <input type="hidden" name="utm_source" id="fe764" value="">
+                                <input type="hidden" name="utm_term" id="fe765" value="">
+                                <input type="hidden" name="utm_content" id="fe766" value="">
+                                <input type="hidden" name="lc_landing" id="fe767" value="">
+                                <input type="hidden" name="comments" id="comments" value="Quote Request Form: ">
+                                <input type="hidden" name="hiddenField" id="fe408"
+                                    value="51363656-A408-EB11-A813-000D3AADFB45">
+                                <input type="hidden" name="elqCustomerGUID" value="">
+                                <input type="hidden" name="elqCookieWrite" value="0">
+                                <input type="hidden" name="cemexregion" value="">
+                                <input type="hidden" name="formName" id="fe768" value="DE Request A Quote">
+                                <input type="hidden" name="resCom" value="">
+
+                            </form>
+                    </section>
+            </@contentWrapperMacro.contentWrapper>
+        </section>
+    </div>
+</div>
+
+<script type="text/javascript" src="https://img04.en25.com/i/livevalidation_standalone.compressed.js"></script>
+<script type='text/javascript'>
+    var timerId = null, timeout = 5;
+</script>
+<script>
+function getCurrentURL () {
+  return window.location.href
+}
+const url = getCurrentURL().substr(0,getCurrentURL().lastIndexOf("/"));
+$("#form55").submit(function(e){
+    e.preventDefault();
+    grecaptcha.ready(function() {
+    grecaptcha.execute('6LeaROsZAAAAAOvG0k154pdaiCMXrXrcHuqsQS2v', {action: 'submit'}).then(function(token) {
+    	var isvalidpostcode=checkpostcode();
+    	var isvalidnumber=checkPhoneNumber();
+    	if(isvalidpostcode && isvalidnumber){
+        	$.ajax({
+            	url: 'https://s916025651.t.eloqua.com/e/f2',
+            	type: 'post',
+            	data:$('#form55').serialize(),
+            
+            	success:function(){
+               	 window.location.replace(url+"/danke-angebot-anfordern");
+            	}
+           });
+    	}
+	});
+    });
+});
+
+</script>
+<script type="text/javascript">
+function checkpostcode(){
+    var regex = new RegExp("^\\d{5}$");
+    var postValue=$("#fe750").val();
+     if(regex.test(postValue)){
+      $("#postError").text("");
+      return true;  
+    }else{
+    $("#postError").text("Bitte richtige Postleitzahl eingeben!!");
+      return false;
+       
+    }
+   
+}
+function checkPhoneNumber(){
+    var regex = new RegExp("(\\(?([\\d \\-\\)\\–\\+\\/\\(]+){6,}\\)?([ .\\-–\\/]?)([\\d]+))");
+    var phoneValue=$("#fe745").val();
+     if(regex.test(phoneValue)){
+      $("#phoneError").text("");
+      return true;
+        
+    }else{
+    $("#phoneError").text("Bitte gültige Telefonnummer eingeben!!");
+      return false;
+       
+    }
+   
+}
+</script>
+
+<script type='text/javascript'>
+    function WaitUntilCustomerGUIDIsRetrieved() {
+        if (!!(timerId)) {
+            if (timeout == 0) {
+                return;
+            }
+            if (typeof this.GetElqCustomerGUID === 'function') {
+                document.forms["FormularohneTitel-1622630365225"].elements["elqCustomerGUID"].value = GetElqCustomerGUID();
+                return;
+            }
+            timeout -= 1;
+        }
+        timerId = setTimeout("WaitUntilCustomerGUIDIsRetrieved()", 500);
+        return;
+    }
+    window.onload = WaitUntilCustomerGUIDIsRetrieved;
+    _elqQ.push(['elqGetCustomerGUID']);
+</script>
+
+<script>
+    document.onload = handleDocumentLoad('form55', '916025651');
+    function handleDocumentLoad(b, a) {
+        window.getElqFormSubmissionToken(b, a);
+        window.processLastFormField()
+    }
+    function getElqFormSubmissionToken(g, c) {
+        var e = new XMLHttpRequest();
+        var b = document.getElementById(g);
+        if (b && b.elements.namedItem("elqFormSubmissionToken")) {
+            var f = b.action;
+            var a = window.getHostName(f);
+            a = "https://" + a + "/e/formsubmittoken?elqSiteID=" + c;
+            if (a) {
+                e.onreadystatechange = function () {
+                    if (e.readyState === 4) {
+                        if (e.status === 200) {
+                            b.elements.namedItem("elqFormSubmissionToken").value = e.responseText
+                        }
+                        else {
+                            b.elements.namedItem("elqFormSubmissionToken").value = ""
+                        }
+                    }
+                };
+                e.open("GET", a, true);
+                e.send()
+            }
+            else {
+                b.elements.namedItem("elqFormSubmissionToken").value = ""
+            }
+        }
+    }
+    function getHostName(b) {
+        if (typeof window.URL === "function") {
+            return new window.URL(b).hostname
+        }
+        else {
+            var a = b.match(/:\/\/(www[0-9]?\.)?(.[^\/:]+)/i);
+            if (a !== null && a.length > 2 && typeof a[2] === "string" && a[2].length > 0) {
+                return a[2]
+            }
+            else {
+                return null
+            }
+        }
+    }
+    function processLastFormField() {
+        var form = document.getElementById("form55");
+        var lastFormField = form.querySelector("#elq-FormLastRow");
+        lastFormField.style.display = "none";
+    }
+</script>
+
+ <script src="https://www.google.com/recaptcha/api.js?render=6LeaROsZAAAAAOvG0k154pdaiCMXrXrcHuqsQS2v"></script>  
+
+<script>
+
+    let firstCheckbox = document.getElementById("fe994")
+    firstCheckbox.addEventListener("change", (e) => {
+        if (e.target.checked) {
+            firstCheckbox.setCustomValidity("")
+        }
+    })
+
+    function formSubmitBtn($event) {
+
+        //#region Product Checkboxes
+        //Add the class "product-checkbox" onto all checkboxes that you want to validate
+        let productCheckboxes = document.querySelectorAll(["input[type=checkbox].product-checkbox:checked"])
+        if (productCheckboxes.length == 0) {
+            firstCheckbox.setCustomValidity("Bitte wählen Sie mindestens ein Produkt aus");
+            return;
+        } else {
+            firstCheckbox.setCustomValidity("");
+        }
+        //#endregion
+
+        //      if (!$event.target.form.checkValidity()) {
+        //          return;
+        //      }
+
+        //      $event.preventDefault();
+
+        // Submit Form
+        //       grecaptcha.ready(function () {
+        //           grecaptcha.execute("6LesHX8bAAAAABsshF5EyHgG3a-zm9nzYFDMBYeK", { action: 'submit' }).then(function (token) {
+        //               $event.target.form.elements['g-recaptcha-response'].value = token;
+        //              $event.target.form.submit();
+        //          });
+        //       });
+    }
+</script>
+
+
+<script>
+
+    // logic when submit button is pressed launch logic of passing arguments
+    let submitButton = document.getElementById('fe736');
+    let comments = document.getElementsByName('comments')[0];
+
+    //    let cemexregion = document.getElementsByName('cemexregion')[0];
+    submitButton.addEventListener('click', event => {
+        comments.value = ""
+
+        // add the value of the radio button
+        let radio = document.getElementsByName('enqType');
+        let radioName = document.getElementById('enquiryName').innerText;
+        let radioValue;
+        // iterate over the radio button to search for the checked radio button
+        radio.forEach(element => {
+            if (element.checked) {
+                radioValue = element.value.toLowerCase();
+            }
+        });
+
+
+        // ADD CHECKBOXES TO COMMENTS FIELD
+        let checkboxes = document.querySelectorAll('.product-checkbox:checked');
+        // Filter by checked
+        let checkedCheckboxes = Array.from(checkboxes).map(cb => cb.value.toLowerCase()).join(",")
+        comments.value = addToComments("Products Required", checkedCheckboxes)
+
+        // add if other product is selected
+        let otherProd = document.getElementsByName('otherProduct')[0].name;
+        let otherProduct = document.getElementsByName('otherProduct')[0].value;
+        if (otherProduct != "") {
+            comments.value = addToComments(otherProd, otherProduct)
+        }
+    })
+
+    // function to add to the comments field
+    function addToComments(name, val) {
+        let comments = document.getElementsByName('comments')[0].value;
+        return comments + name + ':' + val + ' ';
+    }
+
+    // hide/show 
+    // if existing project or potential make region and country required; [easy task]
+    let projectStatus = document.getElementsByName('enqType');
+    // let projectDescription = document.getElementById('fe397');
+    let projaddress = document.getElementById('fe748')
+    let PLZ = document.getElementById('PLZ')
+    let Ort = document.getElementById('Ort')
+    let form = document.getElementsByClassName('textContainer');
+    let otherButton = document.getElementById('fe997');
+    let concreteButton = document.getElementById('fe994');
+    let concreteVolume = document.getElementById('concreteVolume');
+    let concreteVolumeRequest = document.getElementById('fe1215')
+    let otherTxt = document.getElementById('otherProd');
+    let otherRequest = document.getElementById('fe5600');
+    let generalCommentBox = document.getElementById('generalCommentBox');
+    //   let generalTxtBox = document.getElementById('fe630');
+    let generalCommentLabel = document.getElementById('generalCommentLabel');
+    let gen = document.getElementsByClassName('gen');
+    let hide = document.getElementsByName('hide');
+    otherTxt.style.display = 'none';
+    otherRequest.style.display = 'none';
+
+    // Concrete (Beton)
+    concreteVolume.style.display = 'none';
+    concreteVolumeRequest.style.display = 'none';
+    concreteVolumeRequest.required = false;
+
+    generalCommentBox.style.display = 'none';
+    PLZ.style.display = 'none';
+    Ort.style.display = 'none';
+    Array.from(hide).forEach(element => {
+        element.style.display = 'none';
+    })
+    projectStatus.forEach(element => {
+        element.addEventListener('click', event => {
+            if (element.checked) {
+                if (element.value == 'VORHANDENES PROJEKT' || element.value == 'POTENZIELLES PROJEKT') {
+                    // This code is done to repopulate form if general enquiry was clicked first
+                    Array.from(hide).forEach(element => {
+                        element.style.display = 'block';
+                    })
+                    generalCommentBox.style.display = 'block';
+                    generalCommentLabel.innerText = "Kurze Projektbeschreibung"
+                    PLZ.style.display = 'block'
+                    Ort.style.display = 'block';
+                    //                  generalTxtBox.required = false;
+                    generalCommentBox.required = true;
+                    //                 region.required = false;
+                    //                 country.required = false;
+                    projaddress.required = true;
+                    PLZ.required = true;
+                    Ort.required = true;
+
+                    // create the text box
+                }
+                // if general enquiry disappear everything and insert a comment box; [medium task]
+                if (element.value == 'ALLGEMEINE ANFRAGE') {
+                    Array.from(hide).forEach(element => {
+                        element.style.display = 'none';
+                    })
+                    //                   Array.from(gen).forEach(element => {
+                    //                      element.style.display = 'block';
+                    //                   })
+                    generalCommentBox.style.display = 'block';
+                    generalCommentLabel.innerText = "Ihre Anfrage"
+                    generalCommentBox.required = true;
+                    projaddress.required = false;
+                    PLZ.required = true;
+                    Ort.required = true;
+
+                }
+                // add product information
+                if (element.value == 'PRODUKTINFORMATION') {
+                    Array.from(hide).forEach(element => {
+                        element.style.display = 'none';
+                    })
+                    generalCommentBox.style.display = 'block';
+                    generalCommentLabel.innerText = "Ihre Anfrage"
+                    generalCommentBox.required = true;
+                    projaddress.required = false;
+                    PLZ.required = true;
+                    Ort.required = true;
+
+
+                }
+            }
+        })
+    });
+
+    // add event listener to the concrete volume checkbox
+    concreteButton.addEventListener('click', event => {
+        if (concreteButton.checked) {
+            // show the volume field
+            concreteVolumeRequest.required = true;
+            concreteVolumeRequest.style.display = 'block';
+            concreteVolume.style.display = 'block';
+        } else {
+            // hide the otherField
+            concreteVolumeRequest.required = false;
+            concreteVolumeRequest.style.display = 'none';
+            concreteVolume.style.display = 'none';
+        }
+    });
+
+
+
+    // add event listener to the Other button
+    otherButton.addEventListener('click', event => {
+        if (otherButton.checked) {
+            // show the otherField
+            otherRequest.required = true;
+            otherRequest.style.display = 'block';
+            otherTxt.style.display = 'block';
+        } else {
+            // hide the otherField
+            otherRequest.required = false;
+            otherRequest.style.display = 'none';
+            otherTxt.style.display = 'none';
+        }
+    });
+
+
+    // residential or commercial logic
+    let optResCom = document.getElementsByName('typeCust');
+    let companyfield = document.getElementById('fe746')
+    let positionfield = document.getElementById('fe759')
+    let hideProj = document.getElementsByClassName('hideProj');
+    Array.from(hideProj).forEach(elm => {
+        elm.style.display = "none"
+    })
+    // logic for hide/unhide Company & Job Role
+    optResCom.forEach(element => {
+        element.addEventListener('click', event => {
+            if (element.checked) {
+                if (element.value == "KOMMERZIELL") {
+                    Array.from(hideProj).forEach(elm => {
+                        elm.style.display = "block"
+                        companyfield.required = true;
+                        positionfield.required = true;
+                    })
+                }
+                if (element.value == "PRIVATPERSON") {
+                    Array.from(hideProj).forEach(elm => {
+                        elm.style.display = "none"
+                        companyfield.required = false;
+                        positionfield.required = false;
+                    })
+                }
+            }
+        })
+    })
+</script>

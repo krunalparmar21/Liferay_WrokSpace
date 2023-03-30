@@ -1,0 +1,2 @@
+contextPaths=/my-rest-service
+jaxRsServiceFilterStrings=(component.name=com.liferaydemo.application.MyRestServiceApplication)

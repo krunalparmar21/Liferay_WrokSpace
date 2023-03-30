@@ -1,0 +1,8 @@
+Bundle-Name: FormField
+Bundle-SymbolicName: formfield
+Bundle-Version: 1.0.0
+Liferay-JS-Config: /META-INF/resources/config.js
+Provide-Capability:\
+	soy;\
+		type:String="LiferayFormField"
+Web-ContextPath: /dynamic-data-FormField-form-field

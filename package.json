@@ -1,0 +1,11 @@
+{
+    "private": true,
+    "workspaces": {
+        "packages": [
+            "modules/FormField"
+        ]
+    },
+    "dependencies": {
+        "gulp": "^4.0.2"
+    }
+}

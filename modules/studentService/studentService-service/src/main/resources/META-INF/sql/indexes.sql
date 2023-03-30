@@ -1,0 +1,1 @@
+create index IX_8EB68596 on stud_StudentDemo (firstName[$COLUMN_LENGTH:75$]);

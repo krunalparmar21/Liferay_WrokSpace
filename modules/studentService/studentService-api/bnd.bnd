@@ -1,0 +1,10 @@
+Bundle-Name: studentService-api
+Bundle-SymbolicName: com.inexture.studentService.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	com.inexture.studentService.exception,\
+	com.inexture.studentService.model,\
+	com.inexture.studentService.service,\
+	com.inexture.studentService.service.persistence
+-check: EXPORTS
+-includeresource: META-INF/service.xml=../studentService-service/service.xml

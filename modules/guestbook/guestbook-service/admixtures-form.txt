@@ -1,0 +1,798 @@
+<#--  Imports  -->
+
+<#import "${fullTemplatesPath}/macros/content-wrapper.ftl" as contentWrapperMacro />
+<#import "${fullTemplatesPath}/macros/cta-secondary.ftl" as ctaSecondaryMacro />
+<#import "${fullTemplatesPath}/functions/web-content-functions.ftl" as webContentFunctions />
+<#import "${fullTemplatesPath}/functions/url-functions.ftl" as urlFunctions />
+<#import "${fullTemplatesPath}/macros/icon.ftl" as iconMacro />
+<#import "${fullTemplatesPath}/functions/web-content-functions.ftl" as webContentFunctions />
+<#import "${fullTemplatesPath}/macros/eyebrow.ftl" as eyebrowMacro />
+<#import "${fullTemplatesPath}/macros/cta-primary.ftl" as ctaPrimaryMacro />
+<#import "${fullTemplatesPath}/macros/cta-link.ftl" as ctaLinkMacro />
+<style>
+    #elq-FormLastRow {
+        position: absolute;
+        left: -80%;
+        top: -80%
+    }
+
+    .textContainer {
+        padding: 10px;
+    }
+
+   
+    .elq-item-input {
+        padding: 10px;
+    }
+
+    .elq-item-select {
+        padding: 10px;
+    }
+
+    .elq-required {
+        color: red;
+    }
+
+    .checkbox-aligned {
+        font-weight: 400;
+    }
+    
+
+    .buttonMM {
+        width: 100%;
+        border-radius: 24px;
+        background-color: #1697f3;
+        color: #ffffff;
+        border: none;
+        font-weight: 600;
+    }
+
+    .buttonMM:hover {
+        color: #1697f3;
+        background-color: #F4F6F9;
+    }
+
+    .block-full-width {
+        background-color: #fff;
+        border-bottom: 1px solid #ececec
+    }
+    #allgemeineanfrage{
+        display: none;
+    }
+    #produktinformation{
+        display: none;
+    }
+
+    #angebotanfordern{
+        display: none;
+    }
+
+
+    @media(min-width:1024px) {
+        .app-root .block-full-width .sections-wrapper {
+            position: relative;
+            padding: calc(1/var(--grid-columns)*100*1% - var(--grid-gap)/var(--grid-columns)*(var(--grid-columns) - 1) + var(--grid-gap));
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+            justify-content: space-between;
+            margin: 0 auto
+        }
+
+        .app-root .block-full-width .sections-wrapper:before {
+            content: "";
+            display: block;
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 100%;
+            width: 100%;
+            pointer-events: none
+        }
+    }
+
+    .app-root .block-full-width .section-container {
+        position: relative;
+        padding: 48px 0
+    }
+
+    .app-root .block-full-width .section-container:before {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        left: calc(var(--grid-padding)*-1);
+        right: calc(var(--grid-padding)*-1);
+        height: 100%;
+        border-bottom: 1px solid #ececec;
+        pointer-events: none
+    }
+
+    @media(min-width:1024px) {
+        .app-root .block-full-width .section-container {
+            width: 100%;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            padding: 0
+        }
+
+        .app-root .block-full-width .section-container:before {
+            content: none
+        }
+    }
+
+    .app-root .block-full-width .section-content {
+        color: #333;
+        margin-bottom: 32px
+    }
+</style>
+
+<div class="row" style="background-color:#023185;">
+
+    <div class="col-sm-4">
+                <img src="/documents/45807659/45840051/people-3.png/" style="width:100%;" />
+        <div class="block-contact-section muban-block" data-component="block-contact-section">
+            <header class="contact-header">
+                <h2 class="global-h3">${LeftHandMenu.MenuTitle.getData()}</h2>
+            </header>
+            <#list LeftHandMenu.getSiblings() as curr_LeftHandMenu>
+                <#assign Hours=curr_LeftHandMenu.getChild("Hours")!"" />
+                <#list Hours.getSiblings() as curr_Hours>
+                    <#assign Times=curr_Hours.getChild("Times")!"" />
+                    <ul class="main-items">
+                        <#if Times.data?trim !="">
+                            <li>
+                                <span class="icon icon-content_-time" data-component="icon"></span>
+                                <p class="global-body main-item-copy">${Times.getData()}</p>
+                            </li>
+                        </#if>
+                    </ul>
+                </#list>
+            </#list>
+            <ul class="areas-list">
+                <#list LeftHandMenu.getSiblings() as curr_LeftHandMenu>
+                    <#assign Phone=curr_LeftHandMenu.getChild("Phone")!"" />
+                    <#list Phone.getSiblings() as curr_Phone>
+                        <#assign Department=curr_Phone.getChild("Department")!"" />
+                        <#assign PhoneNumber=curr_Phone.getChild("PhoneNumber")!"" />
+                        <#assign DepartmentEmail=curr_Phone.getChild("DepartmentEmail")!"" />
+                        <#if Department.data?trim !="">
+                            <#if PhoneNumber.data?trim !="">
+                                <#if DepartmentEmail.data?trim !="">
+                                    <li class="area-group">
+                                        <h3 class="global-body area-title">${Department.getData()}</h3>
+                                        <ul class="area-items">
+                                            <li>
+                                                <a style="color:#ffffff;" href="tel:${PhoneNumber.getData()}">
+                                                    <span class="icon icon-content_phone" data-component="icon"></span>
+                                                    <span class="area-copy global-body">${PhoneNumber.getData()}</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a style="color:#ffffff;" href="mailto:${DepartmentEmail.getData()}">
+                                                    <span class="icon icon-action-and-function_mail"
+                                                        data-component="icon"></span>
+                                                    <span
+                                                        class="area-copy global-body">${DepartmentEmail.getData()}</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </#if>
+                            </#if>
+                        </#if>
+                    </#list>
+                </#list>
+            </ul>
+        </div>
+    </div>
+
+    <div class="col-sm-8">
+
+        <section class="block-full-width muban-block" data-component="documentation-wrapper" id="admixtureForm">
+            <@contentWrapperMacro.contentWrapper>
+                <div class="sections-wrapper">
+                    <section class="section-container">
+                        <div class="section-content global-body rich-body-light">
+
+                            <div style="padding-top:10px; padding-bottom:10px; padding-right:10px;">
+                                <h1 class="global-h3" style="color:#023185;">${Form.FormTitle.getData()}</h1>
+                                <h2 class="global-body-large" style="color:#023185;">${Form.FormDescription.getData()}
+                                </h2>
+                            </div>
+
+                            
+                            <form method="post" name="FormularohneTitel-1622630365225" id="admixtures-form" class="elq-form">
+                                <input value="FormularohneTitel-1622630365225" type="hidden" name="elqFormName">
+                                <input value="916025651" type="hidden" name="elqSiteId">
+                                <input value="" type="hidden" id="elqFormSubmissionToken" name="elqFormSubmissionToken">
+                                <input name="elqCampaignId" type="hidden">
+
+                                <div class="row">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div style="padding-top:0px; padding-bottom:20px; padding-right:10px;">
+                                                <label style="margin-bottom:10px;" class="global-card-body input-label"
+                                                    for="fe758" id="enquiryName">Um Ihnen besser helfen zu können,
+                                                    nennen Sie uns bitte Ihre Anfragenart</label>
+                                                <div class="row" id="fe758">
+                                                    <div class="col-sm-6">
+                                                         <div
+                                                            style="padding-top:10px; padding-bottom:10px; padding-right:10px;">
+                                                            <input type="radio" id="radio-ALLGEMEINE-ANFRAGE"
+                                                                value="ALLGEMEINE ANFRAGE" name="enqType" onclick="allgemeineAnfrageShow()">
+                                                            <label class="checkbox-aligned elq-item-label"
+                                                                for="radio-ALLGEMEINE-ANFRAGE">Allgemeine
+                                                                Anfrage</label>
+                                                        </div>
+                                                        <div
+                                                        style="padding-top:10px; padding-bottom:10px; padding-right:10px;">
+                                                        <input type="radio" id="radio-ANGEBOT-ANFORDERN"
+                                                            value="ANGEBOT ANFORDERN" name="enqType" onclick="angebotAnfordernShow();">
+                                                        <label class="checkbox-aligned elq-item-label"
+                                                            for="radio-ANGEBOT-ANFORDERN">Angebot anfordern</label>
+                                                       </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div
+                                                            style="padding-top:10px; padding-bottom:10px; padding-right:10px;">
+                                                            <input type="radio" id="radio-PRODUKT-INFORMATION"
+                                                                value="PRODUKT INFORMATION" name="enqType" onclick="produktInformationShow()">
+                                                            <label class="checkbox-aligned elq-item-label"
+                                                                for="radio-PRODUKT-INFORMATION">Produktinformation</label>
+                                                        </div>
+                                                       
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+
+                                    <div class="row" id="allgemeineanfrage" >
+                                        <div class="col-sm-6">
+                                            <div style="padding-top:10px; padding-bottom:20px; padding-right:10px;">
+                                                <label class="global-card-body input-label" for="IHRE-ANFRAGE">Ihre Anfrage</label>
+                                                <input required type="text" class="global-body form-input" name="Ihre Anfrage"
+                                                    id="IHRE-ANFRAGE" value="" style="width:100%">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row" id="angebotanfordern" >
+                                        <div class="col-sm-6">
+                                            <div style="padding-top:10px; padding-bottom:20px; padding-right:10px;">
+                                                <label class="global-card-body input-label" for="PROJEKT-BESCHREIBUNG">Projektbeschreibung</label>
+                                                <input required type="text" class="global-body form-input" name="Projektbeschreibung"
+                                                    id="PROJEKT-BESCHREIBUNG" value="" style="width:100%">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row" id="produktinformation">
+                                        <div class="col-sm-12">
+                                            <div style="padding-top:20px; padding-bottom:20px; padding-right:10px;">
+                                                <label class="global-card-body input-label" for="fe760"
+                                                    id="productName">Zusatzmittel für Transportbeton :</label>
+                                            </div>
+                                        </div>
+    
+                                        <div class="row">
+                                            <div style="padding-top:20px; padding-bottom:20px; padding-right:10px;">
+                                                <div class="col-sm-4 list-order three-column">
+                                                    <input type="checkbox" class="checkbox-input chkbx readymix-checkbox"
+                                                        id="FERTIGMISCHUNG-VERFLÜSSIGER" value="Fertigmischung-Verflüssiger" name="Fertigmischung-Verflüssiger">
+                                                    <label class="checkbox-aligned elq-item-label" for="FERTIGMISCHUNG-VERFLÜSSIGER">Verflüssiger</label>
+                                                </div>
+    
+                                                <div class="col-sm-4 list-order three-column">
+                                                    <input type="checkbox" class="checkbox-input chkbx readymix-checkbox"
+                                                        id="FERTIGMISCHUNG-LUFTPORENBILDNER" value="Fertigmischung-Luftporenbildner"
+                                                        name="Fertigmischung-Luftporenbildner">
+                                                    <label class="checkbox-aligned elq-item-label" for="FERTIGMISCHUNG-LUFTPORENBILDNER">Luftporenbildner</label>
+                                                </div>
+    
+                                                <div class="col-sm-4 list-order three-column">
+                                                    <input type="checkbox" class="checkbox-input chkbx readymix-checkbox"
+                                                        id="FERTIGMISCHUNG-BESCHLEUNIGER" value="Fertigmischung-Beschleuniger" name="Fertigmischung-Beschleuniger">
+                                                    <label class="checkbox-aligned elq-item-label"
+                                                        for="FERTIGMISCHUNG-BESCHLEUNIGER">Beschleuniger</label>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                        <div class="row">
+                                            <div style="padding-top:20px; padding-bottom:20px; padding-right:10px;">
+    
+                                                <div class="col-sm-4 list-order three-column">
+                                                    <input type="checkbox" class="checkbox-input chkbx readymix-checkbox"
+                                                        id="FERTIGMISCHUNG-VERZÖGERER" value="Fertigmischung-Verzögerer" name="Fertigmischung-Verzögerer">
+                                                    <label class="checkbox-aligned elq-item-label"
+                                                        for="FERTIGMISCHUNG-VERZÖGERER">Verzögerer</label>
+                                                </div>
+                                                <div class="col-sm-4 list-order three-column">
+                                                    <input type="checkbox" class="checkbox-input chkbx readymix-checkbox
+                                                        id="FERTIGMISCHUNG-STABILISIERER" value="Fertigmischung-Stabilisierer" name="Fertigmischung-Stabilisierer">
+                                                    <label class="checkbox-aligned elq-item-label" for="FERTIGMISCHUNG-STABILISIERER">Stabilisierer</label>
+                                                </div>
+                                                <div class="col-sm-4 list-order three-column">
+                                                    <input type="checkbox" class="checkbox-input chkbx readymix-checkbox"
+                                                        id="FERTIGMISCHUNG-EINPRESSHILFEN" value="Fertigmischung-Einpresshilfen" name="Fertigmischung-Einpresshilfen">
+                                                    <label class="checkbox-aligned elq-item-label" for="FERTIGMISCHUNG-EINPRESSHILFEN">Einpresshilfen</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div style="padding-top:20px; padding-bottom:20px; padding-right:10px;">
+    
+                                                <div class="col-sm-4 list-order three-column">
+                                                    <input type="checkbox" class="checkbox-input chkbx readymix-checkbox"
+                                                        id="FERTIGMISCHUNG-MÖRTELADDITIVE" value="Fertigmischung-Mörteladditive" name="Fertigmischung-Mörteladditive">
+                                                    <label class="checkbox-aligned elq-item-label"
+                                                        for="FERTIGMISCHUNG-MÖRTELADDITIVE">Mörteladditive</label>
+                                                </div>
+                                                <div class="col-sm-4 list-order three-column">
+                                                    <input type="checkbox" class="checkbox-input chkbx readymix-checkbox"
+                                                        id="FERTIGMISCHUNG-NACHBEHANDLUNGSMITTEL" value="Fertigmischung-Nachbehandlungsmittel" name="Fertigmischung-Nachbehandlungsmittel">
+                                                    <label class="checkbox-aligned elq-item-label" for="FERTIGMISCHUNG-NACHBEHANDLUNGSMITTEL">Nachbehandlungsmittel</label>
+                                                </div>
+                                            <div class="col-sm-4 list-order three-column">
+                                                <input type="checkbox" class="checkbox-input chkbx readymix-checkbox"
+                                                    id="FERTIGMISCHUNG-MISCHERSCHUTZ" value="Fertigmischung-Mischerschutz" name="Fertigmischung-Mischerschutz">
+                                                <label class="checkbox-aligned elq-item-label"
+                                                    for="FERTIGMISCHUNG-MISCHERSCHUTZ">Mischerschutz</label>
+                                            </div>
+                                        </div>
+                                        </div>
+                                        <div class="row">
+                                            <div style="padding-top:20px; padding-bottom:20px; padding-right:10px;">
+                                                <div class="col-sm-4 list-order three-column">
+                                                    <input type="checkbox" class="checkbox-input chkbx readymix-checkbox"
+                                                        id="FERTIGMISCHUNG-PUMPHILFE" value="Fertigmischung-Pumphilfe" name="Fertigmischung-Pumphilfe">
+                                                    <label class="checkbox-aligned elq-item-label" for="FERTIGMISCHUNG-PUMPHILFE">Pumphilfe</label>
+                                                </div>
+                                                <div class="col-sm-4 list-order three-column">
+                                                    <input type="checkbox" class="checkbox-input chkbx readymix-checkbox"
+                                                        id="FERTIGMISCHUNG-RECYCLING-ADDITIVE" value="Fertigmischung-Recycling-Additive" name="Fertigmischung-Recycling-Additive">
+                                                    <label class="checkbox-aligned elq-item-label" for="FERTIGMISCHUNG-RECYCLING-ADDITIVE">Recycling-Additive</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                   
+                                        <div class="col-sm-12">
+                                            <div style="padding-top:20px; padding-bottom:20px; padding-right:10px;">
+                                                <label class="global-card-body input-label" for="fe760"
+                                                    id="productName">Zusatzmittel für Betonfertigteilindustrie :</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div style="padding-top:20px; padding-bottom:20px; padding-right:10px;">
+                                                <div class="col-sm-4 list-order three-column">
+                                                    <input type="checkbox" class="checkbox-input chkbx precast-checkbox"
+                                                        id="VORGEFERTIGT-VERFLÜSSIGER" value="vorgefertigt-Verflüssiger" name="vorgefertigt-Verflüssiger">
+                                                    <label class="checkbox-aligned elq-item-label" for="VORGEFERTIGT-VERFLÜSSIGER">Verflüssiger</label>
+                                                </div>
+    
+                                                <div class="col-sm-4 list-order three-column">
+                                                    <input type="checkbox" class="checkbox-input chkbx precast-checkbox"
+                                                        id="VORGEFERTIGT-LUFTPORENBILDNER" value="vorgefertigt-Luftporenbildner"
+                                                        name="vorgefertigt-Luftporenbildner">
+                                                    <label class="checkbox-aligned elq-item-label" for="VORGEFERTIGT-LUFTPORENBILDNER">Luftporenbildner</label>
+                                                </div>
+    
+                                                <div class="col-sm-4 list-order three-column">
+                                                    <input type="checkbox" class="checkbox-input chkbx precast-checkbox"
+                                                        id="VORGEFERTIGT-BESCHLEUNIGER" value="vorgefertigt-Beschleuniger" name="vorgefertigt-Beschleuniger">
+                                                    <label class="checkbox-aligned elq-item-label"
+                                                        for="VORGEFERTIGT-BESCHLEUNIGER">Beschleuniger</label>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                        <div class="row">
+                                            <div style="padding-top:20px; padding-bottom:20px; padding-right:10px;">
+                                                <div class="col-sm-4 list-order three-column">
+                                                    <input type="checkbox" class="checkbox-input chkbx precast-checkbox"
+                                                        id="VORGEFERTIGT-VERZÖGERER" value="vorgefertigt-Verzögerer" name="vorgefertigt-Verzögerer">
+                                                    <label class="checkbox-aligned elq-item-label"
+                                                        for="VORGEFERTIGT-VERZÖGERER">Verzögerer</label>
+                                                </div>
+                                                <div class="col-sm-4 list-order three-column">
+                                                    <input type="checkbox" class="checkbox-input chkbx precast-checkbox"
+                                                        id="VORGEFERTIGT-STABILISIERER" value="vorgefertigt-Stabilisierer" name="vorgefertigt-Stabilisierer">
+                                                    <label class="checkbox-aligned elq-item-label" for="VORGEFERTIGT-STABILISIERER">Stabilisierer</label>
+                                                </div>
+                                                <div class="col-sm-4 list-order three-column">
+                                                    <input type="checkbox" class="checkbox-input chkbx precast-checkbox"
+                                                        id="VORGEFERTIGT-EINPRESSHILFEN" value="vorgefertigt-Einpresshilfen" name="vorgefertigt-Einpresshilfen">
+                                                    <label class="checkbox-aligned elq-item-label" for="VORGEFERTIGT-EINPRESSHILFEN">Einpresshilfen</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div style="padding-top:20px; padding-bottom:20px; padding-right:10px;">
+                                                <div class="col-sm-4 list-order three-column">
+                                                    <input type="checkbox" class="checkbox-input chkbx precast-checkbox"
+                                                        id="VORGEFERTIGT-MÖRTELADDITIVE" value="vorgefertigt-Mörteladditive" name="vorgefertigt-Mörteladditive">
+                                                    <label class="checkbox-aligned elq-item-label"
+                                                        for="VORGEFERTIGT-MÖRTELADDITIVE">Mörteladditive</label>
+                                                </div>
+                                                <div class="col-sm-4 list-order three-column">
+                                                    <input type="checkbox" class="checkbox-input chkbx precast-checkbox"
+                                                        id="VORGEFERTIGT-NACHBEHANDLUNGSMITTEL" value="vorgefertigt-Nachbehandlungsmittel" name="vorgefertigt-Nachbehandlungsmittel">
+                                                    <label class="checkbox-aligned elq-item-label" for="VORGEFERTIGT-NACHBEHANDLUNGSMITTEL">Nachbehandlungsmittel</label>
+                                                </div>
+                                            <div class="col-sm-4 list-order three-column">
+                                                <input type="checkbox" class="checkbox-input chkbx precast-checkbox"
+                                                    id="VORGEFERTIGT-MISCHERSCHUTZ" value="vorgefertigt-Mischerschutz" name="vorgefertigt-Mischerschutz">
+                                                <label class="checkbox-aligned elq-item-label"
+                                                    for="VORGEFERTIGT-MISCHERSCHUTZ">Mischerschutz</label>
+                                            </div>
+                                        </div>
+                                        </div>
+                                        <div class="row">
+                                            <div style="padding-top:20px; padding-bottom:20px; padding-right:10px;">
+                                                <div class="col-sm-4 list-order three-column">
+                                                    <input type="checkbox" class="checkbox-input chkbx precast-checkbox"
+                                                        id="VORGEFERTIGT-PUMPHILFE" value="vorgefertigt-Pumphilfe" name="vorgefertigt-Pumphilfe">
+                                                    <label class="checkbox-aligned elq-item-label" for="VORGEFERTIGT-PUMPHILFE">Pumphilfe</label>
+                                                </div>
+                                                <div class="col-sm-4 list-order three-column">
+                                                    <input type="checkbox" class="checkbox-input chkbx precast-checkbox"
+                                                        id="VORGEFERTIGT-RECYCLING-ADDITIVE" value="vorgefertigt-Recycling-Additive" name="vorgefertigt-Recycling-Additive">
+                                                    <label class="checkbox-aligned elq-item-label" for="VORGEFERTIGT-RECYCLING-ADDITIVE">Recycling-Additive</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                      
+                                        <div class="col-sm-12">
+                                            <div style="padding-top:20px; padding-bottom:10px; padding-right:10px;">
+                                                <label class="global-card-body input-label"> Zusatzmittel für effiziente Mahlprozesse :</label>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-sm-12">
+                                            <div style="padding-top:6px; padding-bottom:20px; padding-right:10px;">
+                                                <div class="col-sm-4 list-order three-column">
+                                                    <input type="checkbox" class="checkbox-input chkbx Mahlhilfen-checkbox"
+                                                        id="MAHLHILFEN" value="Mahlhilfen" name="Mahlhilfen">
+                                                    <label class="checkbox-aligned elq-item-label" for="MAHLHILFEN">Mahlhilfen</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        
+                                        <div class="col-sm-12">
+                                            <div style="padding-top:10px; padding-bottom:20px; padding-right:10px;">
+                                                <div class="col-sm-4 list-order three-column">
+                                                    <input type="checkbox" class="checkbox-input chkbx CO2-checkbox"
+                                                        id="CO2" value="CO2-reduzierte Zusatzmittel" name="CO2-reduzierte Zusatzmittel">
+                                                   <label for="CO2">CO2-reduzierte Zusatzmittel</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        
+                                        <div class="col-sm-12">
+                                            <div style="padding-top:25px; padding-bottom:20px; padding-right:10px;">
+                                                <label class="global-card-body input-label" for="PROJEKTBESCHREIBUNG">Weitere Produktlösungen</label>
+                                                <input required type="text" class="global-body form-input" name="Projektbeschreibung"
+                                                    id="PROJEKTBESCHREIBUNG" value="" style="width:100%">
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                            </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div style="padding-top:10px; padding-bottom:10px; padding-right:10px;">
+                                            <h2 class="global-body-large" style="color:#023185;">Teilen Sie uns Ihre
+                                                Kontaktdaten mit</h2>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div style="padding-top:10px; padding-bottom:20px; padding-right:10px;">
+                                            <label class="global-card-body input-label" for="fe743">Vorname</label>
+                                            <input required type="text" class="global-body form-input" name="firstName"
+                                                id="fe743" value="" style="width:100%"
+                                                placeholder="Bitte geben Sie Ihren Vornamen ein">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div style="padding-top:10px; padding-bottom:20px; padding-right:10px;">
+                                            <label class="global-card-body input-label" for="fe771">Nachname</label>
+                                            <input required type="text" class="global-body form-input" name="lastName"
+                                                id="fe771" value="" style="width:100%;"
+                                                placeholder="Bitte geben Sie Ihren Nachnamen ein">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="hideProj"
+                                            style="padding-top:10px; padding-bottom:20px; padding-right:10px;">
+                                            <label class="global-card-body input-label" for="fe746">Firma</label>
+                                            <input required type="text" class="global-body form-input" name="company"
+                                                id="fe746" value="" style="width:100%;"
+                                                placeholder="Bitte geben Sie Ihren Firmennamen ein">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="hideProj"
+                                            style="padding-top:10px; padding-bottom:20px; padding-right:10px;">
+                                            <label class="global-card-body input-label" for="fe759">Position</label>
+                                            <select class="global-body form-input" id="fe759" name="JobRole"
+                                                style="width:100%;" data-value="">
+                                                <option value disabled selected>-- Bitte auswählen --</option>
+                                                <option value="Management/Geschäftsleitung">Management/Geschäftsleitung
+                                                </option>
+                                                <option value="Beratung">Beratung</option>
+                                                <option value="Abteilungsleiter">Abteilungsleiter</option>
+                                                <option value="Einkauf">Einkauf</option>
+                                                <option value="Finanzen">Finanzen</option>
+                                                <option value="Verwaltung">Verwaltung</option>
+                                                <option value="IT/Technik">IT/Technik</option>
+                                                <option value="Sonstiges">Sonstiges</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--   insert the radio buttons for phone -->
+
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div style="padding-top:10px; padding-bottom:20px; padding-right:10px;">
+                                            <label class="global-card-body input-label" for="fe745">Telefon</label>
+                                            <input required type="number" class="global-body form-input"
+                                                name="mobilePhone" id="fe745" value="" onkeyup="checkPhoneNumber()" style="width:100%;"
+                                                placeholder="Bitte geben Sie Ihre Telefonnummer ein" >
+                                                <span id="phoneError" style="color:red"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div style="padding-top:10px; padding-bottom:20px; padding-right:10px;">
+                                            <label class="global-card-body input-label" ffor="fe769">E-Mail</label>
+                                            <input required type="email" class="global-body form-input" name="email"
+                                                id="fe769" value="" style="width:100%;"
+                                                placeholder="Bitte geben Sie Ihre E-Mail-Adresse an">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-sm-6">
+                                        <div style="padding-top:10px; padding-bottom:10px; padding-right:10px;">
+                                            <label class="global-card-body input-label" for="fe748">Straße, Nr.</label>
+                                            <input type="text" class="global-body form-input" name="jobsiteAddress"
+                                                required id="fe748" placeholder="Bitte geben Sie Ihre Straße, Nr." value="" style="width:100%;">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div style="padding-top:10px; padding-bottom:10px; padding-right:10px;">
+                                            <label class="global-card-body input-label" for="fe777"
+                                                id="OrtLabel">Ort</label>
+                                            <input type="text" class="global-body form-input" name="ort" required
+                                                id="fe777" value="" placeholder="Bitte geben Sie Ihren Standort ein" style="width:100%;">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div style="padding-top:10px; padding-bottom:10px; padding-right:10px;">
+                                            <label class="global-card-body input-label" for="fe750">PLZ</label>
+                                            <input type="text" class="global-body form-input" name="plz" required
+                                                id="fe750" value="" placeholder="Bitte geben Sie Ihre Postleitzahl ein" style="width:100%;" onkeyup="checkpostcode()">
+                                             <span id="postError" style="color:red"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <br />
+                             
+
+
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        
+                                        <div class="submitBtn"
+                                            style="padding-top:10px; padding-bottom:10px; padding-right:10px;">
+                                            <input type="Submit" class="buttonMM" style="padding:15px;" value="Senden"
+                                                id="fe736" onclick="formSubmitBtn(event)" form="admixtures-form">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <input type="hidden" name="country" id="fe761" value="DE">
+                                <input type="hidden" name="CRMaccountId" id="fe401"
+                                    value="~~eloqua..type--emailfield..syntax--Customer_ID_Account1~~">
+                                <input type="hidden" name="utm_campaign" id="fe762" value="">
+                                <input type="hidden" name="utm_medium" id="fe763" value="">
+                                <input type="hidden" name="utm_source" id="fe764" value="">
+                                <input type="hidden" name="utm_term" id="fe765" value="">
+                                <input type="hidden" name="utm_content" id="fe766" value="">
+                                <input type="hidden" name="lc_landing" id="fe767" value="">
+                                <input type="hidden" name="comments" id="comments" value="Quote Request Form: ">
+                                <input type="hidden" name="hiddenField" id="fe408"
+                                    value="51363656-A408-EB11-A813-000D3AADFB45">
+                                <input type="hidden" name="elqCustomerGUID" value="">
+                                <input type="hidden" name="elqCookieWrite" value="0">
+                                <input type="hidden" name="cemexregion" value="">
+                                <input type="hidden" name="formName" id="fe768" value="DE Admixtures Form">
+                                <input type="hidden" name="resCom" value="">
+
+                            </form>
+                    </section>
+            </@contentWrapperMacro.contentWrapper>
+        </section>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+function allgemeineAnfrageShow(){
+  document.getElementById('allgemeineanfrage').style.display ='block';
+  document.getElementById('produktinformation').style.display ='none';
+  document.getElementById('angebotanfordern').style.display ='none';
+}
+function produktInformationShow(){
+    document.getElementById('allgemeineanfrage').style.display ='none';
+  document.getElementById('produktinformation').style.display ='block';
+  document.getElementById('angebotanfordern').style.display ='none';
+}
+function angebotAnfordernShow(){
+    document.getElementById('allgemeineanfrage').style.display ='none';
+  document.getElementById('produktinformation').style.display ='none';
+  document.getElementById('angebotanfordern').style.display ='block';
+}
+</script>
+
+
+
+<script type="text/javascript" src="https://img04.en25.com/i/livevalidation_standalone.compressed.js"></script>
+<script type='text/javascript'>
+    var timerId = null, timeout = 5;
+</script>
+<script>
+function getCurrentURL () {
+  return window.location.href
+}
+const url = getCurrentURL().substr(0,getCurrentURL().lastIndexOf("/"));
+$("#admixtures-form").submit(function(e){
+    e.preventDefault();
+    grecaptcha.ready(function() {
+    grecaptcha.execute('6LeaROsZAAAAAOvG0k154pdaiCMXrXrcHuqsQS2v', {action: 'submit'}).then(function(token) {
+    	var isvalidpostcode=checkpostcode();
+    	var isvalidnumber=checkPhoneNumber();
+    	if(isvalidpostcode && isvalidnumber){
+        	$.ajax({
+            	url: 'https://s916025651.t.eloqua.com/e/f2',
+            	type: 'post',
+            	data:$('#admixtures-form').serialize(),
+            
+            	success:function(){
+               	 window.location.replace(url+"/danke-angebot-anfordern");
+            	}
+           });
+    	}
+	});
+    });
+});
+
+</script>
+<script type="text/javascript">
+function checkpostcode(){
+    var regex = new RegExp("^\\d{5}$");
+    var postValue=$("#fe750").val();
+     if(regex.test(postValue)){
+      $("#postError").text("");
+      return true;  
+    }else{
+    $("#postError").text("Bitte richtige Postleitzahl eingeben!!");
+      return false;
+       
+    }
+   
+}
+function checkPhoneNumber(){
+    var regex = new RegExp("(\\(?([\\d \\-\\)\\–\\+\\/\\(]+){6,}\\)?([ .\\-–\\/]?)([\\d]+))");
+    var phoneValue=$("#fe745").val();
+     if(regex.test(phoneValue)){
+      $("#phoneError").text("");
+      return true;
+        
+    }else{
+    $("#phoneError").text("Bitte gültige Telefonnummer eingeben!!");
+      return false;
+       
+    }
+   
+}
+</script>
+
+<script type='text/javascript'>
+    function WaitUntilCustomerGUIDIsRetrieved() {
+        if (!!(timerId)) {
+            if (timeout == 0) {
+                return;
+            }
+            if (typeof this.GetElqCustomerGUID === 'function') {
+                document.forms["FormularohneTitel-1622630365225"].elements["elqCustomerGUID"].value = GetElqCustomerGUID();
+                return;
+            }
+            timeout -= 1;
+        }
+        timerId = setTimeout("WaitUntilCustomerGUIDIsRetrieved()", 500);
+        return;
+    }
+    window.onload = WaitUntilCustomerGUIDIsRetrieved;
+    _elqQ.push(['elqGetCustomerGUID']);
+</script>
+
+<script>
+    document.onload = handleDocumentLoad('admixtures-form', '916025651');
+    function handleDocumentLoad(b, a) {
+        window.getElqFormSubmissionToken(b, a);
+        window.processLastFormField()
+    }
+    function getElqFormSubmissionToken(g, c) {
+        var e = new XMLHttpRequest();
+        var b = document.getElementById(g);
+        if (b && b.elements.namedItem("elqFormSubmissionToken")) {
+            var f = b.action;
+            var a = window.getHostName(f);
+            a = "https://" + a + "/e/formsubmittoken?elqSiteID=" + c;
+            if (a) {
+                e.onreadystatechange = function () {
+                    if (e.readyState === 4) {
+                        if (e.status === 200) {
+                            b.elements.namedItem("elqFormSubmissionToken").value = e.responseText
+                        }
+                        else {
+                            b.elements.namedItem("elqFormSubmissionToken").value = ""
+                        }
+                    }
+                };
+                e.open("GET", a, true);
+                e.send()
+            }
+            else {
+                b.elements.namedItem("elqFormSubmissionToken").value = ""
+            }
+        }
+    }
+    function getHostName(b) {
+        if (typeof window.URL === "function") {
+            return new window.URL(b).hostname
+        }
+        else {
+            var a = b.match(/:\/\/(www[0-9]?\.)?(.[^\/:]+)/i);
+            if (a !== null && a.length > 2 && typeof a[2] === "string" && a[2].length > 0) {
+                return a[2]
+            }
+            else {
+                return null
+            }
+        }
+    }
+    function processLastFormField() {
+        var form = document.getElementById("admixtures-form");
+        var lastFormField = form.querySelector("#elq-FormLastRow");
+        lastFormField.style.display = "none";
+    }
+</script>
+
+ <script src="https://www.google.com/recaptcha/api.js?render=6LeaROsZAAAAAOvG0k154pdaiCMXrXrcHuqsQS2v"></script>

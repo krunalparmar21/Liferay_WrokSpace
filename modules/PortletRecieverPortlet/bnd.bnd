@@ -1,0 +1,4 @@
+Bundle-Name: PortletRecieverPortlet
+Bundle-SymbolicName: portletrecieverportlet
+Bundle-Version: 1.0.0
+Export-Package: portletrecieverportlet.constants

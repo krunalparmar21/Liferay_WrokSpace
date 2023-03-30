@@ -1,0 +1,13 @@
+dependencies {
+	compile project(":modules:seconddb-service:seconddb-service-api")
+
+	compileOnly group: "com.liferay.portal", name: "release.dxp.api"
+
+	compileOnly group: "com.liferay", name: "com.liferay.portal.spring.extender.api", version: "4.0.0"
+}
+
+buildService {
+	apiDir = "../seconddb-service-api/src/main/java"
+}
+
+group = "com.test.service"

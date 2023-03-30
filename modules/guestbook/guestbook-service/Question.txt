@@ -1,0 +1,43 @@
+Liferay is creating spurious urls on all of the websites.
+Report for WMG-57
+Hello @James
+For this issue, we have to disallow all the web/guest urls in the robot.txt file that created the index.
+For the list of urls, please find the attached file below.
+<file>
+
+After disallowing these types of URLs in the robots.txt file, Google will no longer index them.
+
+After removing the url from the robot.txt file, we must permanently remove it from Google Search Console. 
+for this follow the below steps 
+
+Google Search console, make a request for removal of the index url
+	In order to prevent this URL from being indexed by Google in the future, you must remove it from the Google Search Console.
+	Step 1: Open Google Search Console and select the domain you added for your website.
+	Step 2: Open the console's Removal Section.
+	Step 3: Add "NEW REQUEST"
+	Step 4: Type the URL that needs to be deleted from Google and click "Remove this URL only" if only one url or use "Remove all URLs with this prefix" to remove all the urls starting from the given url in the text box. PFA ss for the same. 
+
+NOTE: This changes would take effect after normally 3-5 days time in search results.
+
+
+CX Go Longform template update
+Wirtup for TIBT-180
+Hello @James
+I have worked on that issue as per my understanding  would you like the create the dynamic structure for CX Go Longform(paperless delivery) as per your requirement you can 
+customize structure <h1> tag for differrent page.
+or would you like to create the structure as same as UK Website. 
+
+
+Wirtup for TIBT-180
+Hello @James
+
+I have worked on that issue as per my understanding  would you like the create the dynamic structure for CX Go Longform (paperless delivery) as per your requirement you can 
+Customize structure <h1> tag for different page
+
+Or would you like to create the structure as same as UK Web site.
+
+no it is not possible to update the template for second page .
+so i would suggest you to create the new structure and template as same as CX Go Longform.
+
+
+

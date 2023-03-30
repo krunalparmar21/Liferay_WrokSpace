@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+<beans
+	default-destroy-method="destroy"
+	default-init-method="afterPropertiesSet"
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+>
+	<bean class="com.test.service.service.impl.EmployeeLocalServiceImpl" id="com.test.service.service.EmployeeLocalService" />
+	<bean class="com.test.service.service.impl.EmployeeServiceImpl" id="com.test.service.service.EmployeeService" />
+	<bean class="com.test.service.service.persistence.impl.EmployeeModelArgumentsResolver" id="com.test.service.service.persistence.impl.EmployeeModelArgumentsResolver" />
+	<bean class="com.test.service.service.persistence.impl.EmployeePersistenceImpl" id="com.test.service.service.persistence.EmployeePersistence">
+		<property name="dataSource" ref="secondDatabase" />
+	</bean>
+</beans>

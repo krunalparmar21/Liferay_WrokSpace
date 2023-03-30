@@ -1,0 +1,4 @@
+Bundle-Name: SessionSenderPortlet
+Bundle-SymbolicName: sessionsenderportlet
+Bundle-Version: 1.0.0
+Export-Package: sessionsenderportlet.constants
